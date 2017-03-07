@@ -158,7 +158,7 @@ post card on the internet. */
   max-height: 90px;
 }
 
-.schoolFrame{
+.school-frame{
   display: -webkit-flex;
   display: flex;
   flex-direction: row;

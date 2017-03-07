@@ -46,7 +46,7 @@ $(document).click(function(loc) {
 ----Basic name and contact Section */
 var bio = {
     "name": "Joel Gonzaga",
-    "role": "Junior Software Developer",
+    "role": "Front End Developer",
     "contacts": {
         "mobile": "626-555-1084",
         "email": "Joel.gonzaga@notfake.com",
@@ -67,7 +67,9 @@ bio.display = function() {
     var formattedGithub = HTMLgithub.replace('%data%', bio.contacts.github);
     var formattedLinkedIn = HTMLcontactGeneric.replace('%data%', bio.contacts.linkedin).replace('%contact%', 'LinkedIn');
     var formattedCity = HTMLlocation.replace('%data%', bio.contacts.location);
-    $("#header").append(formattedName);
+    var formattedWelcome = HTMLwelcomeMsg.replace('%data%',bio.welcomeMessage);
+    var formattedTitle = HTMLheaderRole.replace('%data%',bio.role);
+    $("#header").append(formattedName, formattedTitle);
     //Makes list of formatted contacts
     var toAppend = [
         formattedMobile,
@@ -85,6 +87,7 @@ bio.display = function() {
     var formattedAvatar = HTMLbioPic.replace("%data%", bio.biopic);
     $("#header").append(formattedAvatar);
     //Appends a list of Basic Skills
+    $("#header").append(formattedWelcome);
     $("#header").append(HTMLskillsStart);
     if (bio.skills.length > 0) {
         var totalSkills = bio.skills.length;
@@ -108,7 +111,7 @@ var projects = [{
         "description": "This was a novel written for Nanowrimo " +
             "(National Novel Writing Month) Simple logline of store is: " +
             "A young advernturing noble and former slave encounter ghosts of their last companions in Waterdeep.",
-        "image": [],
+        "images": [],
         "url": "http://nanowrimo.org/",
         "iframe": ""
     },
@@ -116,7 +119,7 @@ var projects = [{
         "title": "Way of Life",
         "dates": "March 2015",
         "description": "I arranged 'A Way of Life' from the 'the Last Samurai' on solo classical guitar.",
-        "image": [],
+        "images": [],
         "url": "https://www.youtube.com/watch?v=27SXt1g37nM",
         "iframe": '<iframe width=auto height=auto src="https://www.youtube.com/embed/27SXt1g37nM?ecver=1" frameborder="0" allowfullscreen></iframe>'
     },
@@ -124,7 +127,7 @@ var projects = [{
         "title": "Korean Seafood: A Moral Dilemma",
         "dates": "December 2013",
         "description": "A blog contribution designed to help authors understand details of life in a foreign country.",
-        "image": ["http://3.bp.blogspot.com/-hVHNz68RgCM/UUdzZL_24QI/AAAAAAAAAY8/Db3XElCVeLo/s320/korean+frying+pan.jpg"],
+        "images": ["http://3.bp.blogspot.com/-hVHNz68RgCM/UUdzZL_24QI/AAAAAAAAAY8/Db3XElCVeLo/s320/korean+frying+pan.jpg"],
         "url": "http://noveltravelist.blogspot.com/2013/03/korea-eating-seafood-moral-dilemma.html#comment-form",
         "iframe": ""
     }
@@ -144,9 +147,9 @@ projects.display = function() {
         ];
         //Not all projects have Images and iFrames.
         //Appending to list only if data is found in respective areas.
-        if (project.image.length) {
+        if (project.images.length) {
             var formattedImage;
-            project.image.forEach(function(image_url) {
+            project.images.forEach(function(image_url) {
                 formattedImage = HTMLprojectImage.replace("%data%", image_url);
                 toAppend.push(formattedImage);
             });
@@ -155,7 +158,7 @@ projects.display = function() {
         if (project.iframe.length) {
             //iframe Variable requires no extra formatted.
             //Is cut and pasted from the Youtube
-            toAppend.push(project['iframe']);
+            toAppend.push(project.iframe);
         }
         toAppend.forEach(function(entry) {
             $(".project-entry:last").append(entry);
@@ -209,9 +212,9 @@ work.display = function() {
     work.jobs.forEach(function(job) {
         $("#workExperience").append(HTMLworkStart);
         var formattedCompany = HTMLworkEmployer.replace("%data%", job.employer).replace("#", job.url);
-        var formattedTitle = HTMLworkTitle.replace("%data%", job.position);
+        var formattedTitle = HTMLworkTitle.replace("%data%", job.title);
         var formattedCompanyTitle = formattedCompany + formattedTitle;
-        var formattedDates = HTMLworkDates.replace("%data%", job["dates"]);
+        var formattedDates = HTMLworkDates.replace("%data%", job.dates);
         var formattedDescription = HTMLworkDescription.replace("%data%", job.description);
         var toAppend = [
             formattedCompanyTitle,
@@ -251,7 +254,7 @@ var education = {
             "title": "Intro to Programming",
             "school": "Udacity",
             "dates": "Jan 2017 - Mar 2017",
-            "school_url": "http://www.udacity.com",
+            "url": "http://www.udacity.com",
             "course_url": "https://www.udacity.com/course/intro-to-programming-nanodegree--nd000",
             "logo": "images/udacity_logo.png"
         },
@@ -259,7 +262,7 @@ var education = {
             "title": "How to Use Git and GitHub",
             "school": "Udacity",
             "dates": "Dec 2016",
-            "school_url": "http://www.udacity.com",
+            "url": "http://www.udacity.com",
             "course_url": "https://www.udacity.com/course/how-to-use-git-and-github--ud775",
             "logo": "images/udacity_logo.png"
         },
@@ -267,7 +270,7 @@ var education = {
             "title": "Introduction to Computer Science",
             "school": "Udacity",
             "dates": "Sep 2016 - Oct 2016",
-            "school_url": "http://www.udacity.com",
+            "url": "http://www.udacity.com",
             "course_url": "https://www.udacity.com/course/intro-to-computer-science--cs101",
             "logo": "images/udacity_logo.png"
         }
@@ -281,7 +284,7 @@ function displayUniversities() {
     education.schools.forEach(function(university) {
         //'formatted_Univeristy_link' requires additional variables.
         //will be composed of the two below.
-        var formatted_school_name = HTMLschoolName.replace("#", university["url"]).replace('%data%', university.name);
+        var formatted_school_name = HTMLschoolName.replace("#", university.url).replace('%data%', university.name);
         var formatted_degree = HTMLschoolDegree.replace("%data%", university.degree);
         var formatted_Univeristy_link = formatted_school_name + formatted_degree;
         //Rest of formatted requires only one replacement per entry. No concatinations.
@@ -296,8 +299,8 @@ function displayUniversities() {
             formatted_major
         ];
         $("#education").append(HTMLschoolFlexer);
-        $(".schoolFrame:last").append(formatted_icon);
-        $(".schoolFrame:last").append(HTMLschoolStart);
+        $(".school-frame:last").append(formatted_icon);
+        $(".school-frame:last").append(HTMLschoolStart);
         toAppend.forEach(function(entry) {
             $(".education-entry:last").append(entry);
         });
@@ -311,7 +314,7 @@ function displayOnlineCourses() {
         var formatted_online_school = HTMLonlineSchool.replace("%data%", techSchool.school);
         var formatted_online_link = formatted_online_course + formatted_online_school;
         var formatted_online_dates = HTMLonlineDates.replace("%data%", techSchool.dates);
-        var formatted_course_link = HTMLonlineURL.replace("#", techSchool.school_url).replace("%data%", techSchool.school);
+        var formatted_course_link = HTMLonlineURL.replace("#", techSchool.url).replace("%data%", techSchool.school);
         var formatted_icon = HTMLschoolIcon.replace("%data%", techSchool.logo);
         var toAppend = [
             formatted_online_link,
@@ -321,8 +324,8 @@ function displayOnlineCourses() {
         /* The extra 'SchoolFrame' element is needed to make the
         school crests display correctly */
         $("#education").append(HTMLschoolFlexer);
-        $(".schoolFrame:last").append(formatted_icon);
-        $(".schoolFrame:last").append(HTMLschoolStart);
+        $(".school-frame:last").append(formatted_icon);
+        $(".school-frame:last").append(HTMLschoolStart);
         toAppend.forEach(function(entry) {
             $(".education-entry:last").append(entry);
         });

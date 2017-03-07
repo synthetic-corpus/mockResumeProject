@@ -159,7 +159,7 @@ Some adjusts were made by me. */
   max-height: 90px;
 }
 
-.schoolFrame{
+.school-frame{
   display: -webkit-flex;
   display: flex;
   flex-direction: row;
