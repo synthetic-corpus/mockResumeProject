@@ -67,8 +67,8 @@ bio.display = function() {
     var formattedGithub = HTMLgithub.replace('%data%', bio.contacts.github);
     var formattedLinkedIn = HTMLcontactGeneric.replace('%data%', bio.contacts.linkedin).replace('%contact%', 'LinkedIn');
     var formattedCity = HTMLlocation.replace('%data%', bio.contacts.location);
-    var formattedWelcome = HTMLwelcomeMsg.replace('%data%',bio.welcomeMessage);
-    var formattedTitle = HTMLheaderRole.replace('%data%',bio.role);
+    var formattedWelcome = HTMLwelcomeMsg.replace('%data%', bio.welcomeMessage);
+    var formattedTitle = HTMLheaderRole.replace('%data%', bio.role);
     $("#header").append(formattedName, formattedTitle);
     //Makes list of formatted contacts
     var toAppend = [
@@ -213,7 +213,7 @@ work.display = function() {
         var formattedTitle = HTMLworkTitle.replace("%data%", job.title);
         var formattedCompanyTitle = formattedCompany + formattedTitle;
         var formattedDates = HTMLworkDates.replace("%data%", job.dates);
-        var formattedLocation = HTMLworkLocation.replace("%data%",job.location);
+        var formattedLocation = HTMLworkLocation.replace("%data%", job.location);
         var formattedDescription = HTMLworkDescription.replace("%data%", job.description);
         var toAppend = [
             formattedCompanyTitle,
