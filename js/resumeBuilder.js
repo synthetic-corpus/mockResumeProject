@@ -111,7 +111,7 @@ var projects = [{
         "description": "This was a novel written for Nanowrimo " +
             "(National Novel Writing Month) Simple logline of store is: " +
             "A young advernturing noble and former slave encounter ghosts of their last companions in Waterdeep.",
-        "images": [],
+        "images": ["http://vignette3.wikia.nocookie.net/forgottenrealms/images/7/7e/Eilistraee_-_old_holy_symbol.jpg/revision/latest?cb=20150824084429"],
         "url": "http://nanowrimo.org/",
         "iframe": ""
     },
@@ -119,7 +119,7 @@ var projects = [{
         "title": "Way of Life",
         "dates": "March 2015",
         "description": "I arranged 'A Way of Life' from the 'the Last Samurai' on solo classical guitar.",
-        "images": [],
+        "images": ["http://www.joblo.com/timthumb.php?src=/posters/images/full/2003-last_samurai-5.jpg&h=600&q=100"],
         "url": "https://www.youtube.com/watch?v=27SXt1g37nM",
         "iframe": '<iframe width=auto height=auto src="https://www.youtube.com/embed/27SXt1g37nM?ecver=1" frameborder="0" allowfullscreen></iframe>'
     },
@@ -147,6 +147,11 @@ projects.display = function() {
         ];
         //Not all projects have Images and iFrames.
         //Appending to list only if data is found in respective areas.
+        if (project.iframe.length) {
+            //iframe Variable requires no extra formatted.
+            //Is cut and pasted from the Youtube
+            toAppend.push(project.iframe);
+        }
         if (project.images.length) {
             var formattedImage;
             project.images.forEach(function(image_url) {
@@ -154,11 +159,6 @@ projects.display = function() {
                 toAppend.push(formattedImage);
             });
 
-        }
-        if (project.iframe.length) {
-            //iframe Variable requires no extra formatted.
-            //Is cut and pasted from the Youtube
-            toAppend.push(project.iframe);
         }
         toAppend.forEach(function(entry) {
             $(".project-entry:last").append(entry);
