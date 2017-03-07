@@ -80,8 +80,7 @@ bio.display = function() {
     ];
     //Appends Aforementioned list to both top and bottom of the Resume.
     toAppend.forEach(function(entry) {
-        $("#topContacts").append(entry);
-        $("#footerContacts").append(entry);
+        $("#topContacts, #footerContacts").append(entry);
     });
     //Makes a avatar and appends it.
     var formattedAvatar = HTMLbioPic.replace("%data%", bio.biopic);
@@ -89,6 +88,7 @@ bio.display = function() {
     //Appends a list of Basic Skills
     $("#header").append(formattedWelcome);
     $("#header").append(HTMLskillsStart);
+
     if (bio.skills.length > 0) {
         var totalSkills = bio.skills.length;
         var count;
@@ -99,8 +99,6 @@ bio.display = function() {
         }
     }
 };
-
-bio.display();
 
 /*
 ----Projects Section */
@@ -165,7 +163,7 @@ projects.display = function() {
         });
     });
 };
-projects.display();
+
 
 /*
 ----Work Section and contact Section */
@@ -215,9 +213,11 @@ work.display = function() {
         var formattedTitle = HTMLworkTitle.replace("%data%", job.title);
         var formattedCompanyTitle = formattedCompany + formattedTitle;
         var formattedDates = HTMLworkDates.replace("%data%", job.dates);
+        var formattedLocation = HTMLworkLocation.replace("%data%",job.location);
         var formattedDescription = HTMLworkDescription.replace("%data%", job.description);
         var toAppend = [
             formattedCompanyTitle,
+            formattedLocation,
             formattedDates,
             formattedDescription
         ];
@@ -226,7 +226,7 @@ work.display = function() {
         });
     });
 };
-work.display();
+
 
 /*
 ----Education Section */
@@ -338,4 +338,7 @@ education.display = function() {
     displayUniversities();
 };
 
+bio.display();
+projects.display();
+work.display();
 education.display();
