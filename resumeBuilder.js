@@ -55,7 +55,7 @@ var bio = {
         "linkedin": "Joel Gonzaga"
     },
     "welcomeMessage": "Fortune Favors the Bold",
-    "skills": ["HTML/CSS", "Git and Github", "User Desktop Support", "Management"],
+    "skills": ["HTML/CSS", "Javascript", "User Desktop Support", "The MEAN Stak"],
     "biopic": "images/my_photo.jpg"
 };
 
